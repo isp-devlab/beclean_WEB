@@ -39,8 +39,41 @@
             <span class="menu-heading fw-bold text-uppercase fs-7">Menu </span>
           </div>
         </div>
-{{-- 
-        <div class="menu-item @if ($title == 'Pool') here @endif">
+
+        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Produk') here show @endif">
+          <span class="menu-link">
+            <span class="menu-icon">
+              <i class="ki-duotone ki-note-2 fs-2">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+                <span class="path4"></span>
+              </i>
+            </span>
+            <span class="menu-title">Produk</span>
+            <span class="menu-arrow"></span>
+          </span>
+          <div class="menu-sub menu-sub-accordion menu-active-bg">
+            <div class="menu-item @if ($subTitle == 'Data Produk') here @endif">
+              <a class="menu-link" href="{{ route('product.index') }}">
+                <span class="menu-bullet">
+                  <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Data Produk</span>
+              </a>
+            </div>
+            <div class="menu-item @if ($subTitle == 'Kategori') here @endif">
+              <a class="menu-link" href="{{ route('product.category.index') }}">
+                <span class="menu-bullet">
+                  <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Kategori</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {{-- <div class="menu-item @if ($title == 'Pool') here @endif">
           <a class="menu-link" href="{{ route('pool') }}">
             <span class="menu-icon">
               <i class="ki-duotone ki-flag fs-2">
@@ -104,7 +137,7 @@
             </span>
             <span class="menu-title">Route</span>
           </a>
-        </div>
+        </div> --}}
 
         <div class="menu-item @if ($title == 'User Management') here @endif">
           <a class="menu-link" href="{{ route('user') }}">
@@ -118,7 +151,7 @@
             </span>
             <span class="menu-title">User Management</span>
           </a>
-        </div> --}}
+        </div>
       </div>
     </div>
   </div>

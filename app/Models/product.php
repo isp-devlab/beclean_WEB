@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\productCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class product extends Model
 {
@@ -18,4 +20,9 @@ class product extends Model
         'name',
         'price'
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(productCategory::class, 'product_category_id');
+    }
 }
