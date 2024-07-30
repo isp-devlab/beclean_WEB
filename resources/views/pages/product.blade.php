@@ -14,23 +14,23 @@
                 </div>
                 <div class="card-toolbar">
                     <button data-bs-toggle="modal" data-bs-target="#add" class="btn btn-primary d-flex align-items-center"><i class="ki-duotone ki-plus fs-2"></i>
-                        Add
+                        Tambah
                     </button>
                     <div class="modal fade" tabindex="-1" id="add">
                         <div class="modal-dialog">
                             <form method="POST" action="{{ route('product.store') }}" class="modal-content">
                                 @csrf
                                 <div class="modal-header">
-                                    <h3 class="modal-title">Add Product</h3>
+                                    <h3 class="modal-title">Tambah Produk</h3>
                                     <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                                         <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                                     </div>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-5">
-                                        <label for="product_category_id" class="required form-label">Category</label>
+                                        <label for="product_category_id" class="required form-label">Kategori</label>
                                         <select name="product_category_id" class="form-control form-control-solid @error('product_category_id') is-invalid @enderror" required>
-                                            <option value="">Select Category</option>
+                                            <option value="">Pilih Kategori</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -42,8 +42,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-5">
-                                        <label for="name" class="required form-label">Name</label>
-                                        <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Product Name" required/>
+                                        <label for="name" class="required form-label">Nama</label>
+                                        <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Nama Produk" required/>
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -51,8 +51,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-5">
-                                        <label for="price" class="required form-label">Price</label>
-                                        <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ old('price') }}" placeholder="Product Price" required/>
+                                        <label for="price" class="required form-label">Harga</label>
+                                        <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ old('price') }}" placeholder="Harga Produk" required/>
                                         @error('price')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -61,8 +61,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
                         </div>
@@ -74,10 +74,10 @@
                     <table id="kt_datatable_horizontal_scroll" class="table table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                <th>Category</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th class="text-end">Actions</th>
+                                <th>Kategori</th>
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th class="text-end">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +94,7 @@
                                     </td>
                                     <td class="text-end">
                                         <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            Actions
+                                            Aksi
                                             <span class="svg-icon fs-5 m-0 ps-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -109,7 +109,7 @@
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit{{ $product->id }}" class="menu-link px-3">Edit</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a id="{{ route('product.destroy', $product->id) }}" class="menu-link px-3 btn-del">Delete</a>
+                                                <a id="{{ route('product.destroy', $product->id) }}" class="menu-link px-3 btn-del">Hapus</a>
                                             </div>
                                         </div>
                                     </td>
@@ -129,16 +129,16 @@
         <form method="POST" action="{{ route('product.update', $product->id) }}" class="modal-content">
             @csrf
             <div class="modal-header">
-                <h3 class="modal-title">Edit Product</h3>
+                <h3 class="modal-title">Edit Produk</h3>
                 <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="mb-5">
-                    <label for="product_category_id" class="required form-label">Category</label>
+                    <label for="product_category_id" class="required form-label">Kategori</label>
                     <select name="product_category_id" class="form-control form-control-solid @error('product_category_id') is-invalid @enderror" required>
-                        <option value="">Select Category</option>
+                        <option value="">Pilih Kategori</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ $product->product_category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
@@ -150,8 +150,8 @@
                     @enderror
                 </div>
                 <div class="mb-5">
-                    <label for="name" class="required form-label">Name</label>
-                    <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ $product->name }}" placeholder="Product Name" required/>
+                    <label for="name" class="required form-label">Nama</label>
+                    <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ $product->name }}" placeholder="Nama Produk" required/>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -159,8 +159,8 @@
                     @enderror
                 </div>
                 <div class="mb-5">
-                    <label for="price" class="required form-label">Price</label>
-                    <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ $product->price }}" placeholder="Product Price" required/>
+                    <label for="price" class="required form-label">Harga</label>
+                    <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ $product->price }}" placeholder="Harga Produk" required/>
                     @error('price')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -169,8 +169,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
     </div>

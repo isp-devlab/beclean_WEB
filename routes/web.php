@@ -6,6 +6,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionOnProgressController;
+use App\Http\Controllers\TransactionPendingController;
+use App\Models\Transaction;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -19,6 +23,21 @@ Route::get('auth/logout', [AuthController::class, 'logout'])->middleware('auth')
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+Route::prefix('/transaction')->group(function () {
+    Route::prefix('/pending')->group(function () {
+        Route::get('/', [TransactionPendingController::class, 'index'])->name('transaction.pending.index');
+    });
+    Route::prefix('/on-progress')->group(function () {
+        Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.onprogress.index');
+    });
+    Route::prefix('/pickup')->group(function () {
+        Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.pickup.index');
+    });
+    Route::prefix('/complete')->group(function () {
+        Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.complete.index');
+    });
+  
+})->middleware('auth');
 
 Route::prefix('/product')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('product.index');

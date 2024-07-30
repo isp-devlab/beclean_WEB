@@ -14,22 +14,22 @@
                 </div>
                 <div class="card-toolbar">
                     <button data-bs-toggle="modal" data-bs-target="#add" class="btn btn-primary d-flex align-items-center"><i class="ki-duotone ki-plus fs-2"></i>
-                        Add
+                        Tambah
                     </button>
                     <div class="modal fade" tabindex="-1" id="add">
                         <div class="modal-dialog">
                             <form method="POST" action="{{ route('product.category.store') }}" class="modal-content">
                                 @csrf
                                 <div class="modal-header">
-                                    <h3 class="modal-title">Add Category</h3>
+                                    <h3 class="modal-title">Tambah Kategori</h3>
                                     <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                                         <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                                     </div>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-5">
-                                        <label for="name" class="required form-label">Name</label>
-                                        <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Category Name" required/>
+                                        <label for="name" class="required form-label">Nama</label>
+                                        <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Nama Kategori" required/>
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -38,8 +38,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
                         </div>
@@ -51,8 +51,8 @@
                     <table id="kt_datatable_horizontal_scroll" class="table table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                <th>Name</th>
-                                <th class="text-end">Actions</th>
+                                <th>Nama</th>
+                                <th class="text-end">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +65,7 @@
                                     </td>
                                     <td class="text-end">
                                         <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            Actions
+                                            Aksi
                                             <span class="svg-icon fs-5 m-0 ps-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -80,7 +80,7 @@
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit{{ $category->id }}" class="menu-link px-3">Edit</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a id="{{ route('product.category.destroy', $category->id) }}" class="menu-link px-3 btn-del">Delete</a>
+                                                <a id="{{ route('product.category.destroy', $category->id) }}" class="menu-link px-3 btn-del">Hapus</a>
                                             </div>
                                         </div>
                                     </td>
@@ -100,15 +100,15 @@
         <form method="POST" action="{{ route('product.category.update', $category->id) }}" class="modal-content">
             @csrf
             <div class="modal-header">
-                <h3 class="modal-title">Edit Category</h3>
+                <h3 class="modal-title">Edit Kategori</h3>
                 <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="mb-5">
-                    <label for="name" class="required form-label">Name</label>
-                    <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ $category->name }}" placeholder="Category Name" required/>
+                    <label for="name" class="required form-label">Nama</label>
+                    <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ $category->name }}" placeholder="Nama Kategori" required/>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -117,8 +117,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
     </div>
