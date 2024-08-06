@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_category_id');
             $table->string('longitude');
             $table->string('latitude');
-            $table->boolean('product_status');
+            $table->string('address');
             $table->boolean('transaction_status');
             $table->timestamps();
 
@@ -33,7 +33,6 @@ return new class extends Migration
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
 
-            $table->index('product_status');
             $table->index('transaction_status');
         });
     }

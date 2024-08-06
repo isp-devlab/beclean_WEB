@@ -26,6 +26,7 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::prefix('/transaction')->group(function () {
     Route::prefix('/pending')->group(function () {
         Route::get('/', [TransactionPendingController::class, 'index'])->name('transaction.pending.index');
+        Route::post('/{id}/add-schedule', [TransactionPendingController::class, 'addSchedule'])->name('transaction.pending.addSchedule');
     });
     Route::prefix('/on-progress')->group(function () {
         Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.onprogress.index');
@@ -36,7 +37,6 @@ Route::prefix('/transaction')->group(function () {
     Route::prefix('/complete')->group(function () {
         Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.complete.index');
     });
-  
 })->middleware('auth');
 
 Route::prefix('/product')->group(function () {
@@ -44,12 +44,12 @@ Route::prefix('/product')->group(function () {
     Route::post('/', [ProductController::class, 'store'])->name('product.store');
     Route::post('/{id}/update', [ProductController::class, 'update'])->name('product.update');
     Route::get('/{id}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
-    Route::prefix('/category')->group(function () {
-        Route::get('/', [ProductCategoryController::class, 'index'])->name('product.category.index');
-        Route::post('/', [ProductCategoryController::class, 'store'])->name('product.category.store');
-        Route::post('/{id}/update', [ProductCategoryController::class, 'update'])->name('product.category.update');
-        Route::get('/{id}/destroy', [ProductCategoryController::class, 'destroy'])->name('product.category.destroy');
-    });
+    // Route::prefix('/category')->group(function () {
+    //     Route::get('/', [ProductCategoryController::class, 'index'])->name('product.category.index');
+    //     Route::post('/', [ProductCategoryController::class, 'store'])->name('product.category.store');
+    //     Route::post('/{id}/update', [ProductCategoryController::class, 'update'])->name('product.category.update');
+    //     Route::get('/{id}/destroy', [ProductCategoryController::class, 'destroy'])->name('product.category.destroy');
+    // });
 })->middleware('auth');
 
 Route::prefix('/user')->group(function () {

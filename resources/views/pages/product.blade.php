@@ -9,7 +9,7 @@
                 <div class="card-title">
                     <h3 class="card-title align-items-start flex-column">
                         <span class="card-label fw-bold fs-3 mb-1">Produk</span>
-                        <span class="text-muted fw-semibold fs-7">Data Produk</span>
+                        <span class="text-muted fw-semibold fs-7">Sampah Daur Ulang</span>
                     </h3>
                 </div>
                 <div class="card-toolbar">
@@ -28,20 +28,6 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-5">
-                                        <label for="product_category_id" class="required form-label">Kategori</label>
-                                        <select name="product_category_id" class="form-control form-control-solid @error('product_category_id') is-invalid @enderror" required>
-                                            <option value="">Pilih Kategori</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('product_category_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-5">
                                         <label for="name" class="required form-label">Nama</label>
                                         <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Nama Produk" required/>
                                         @error('name')
@@ -52,7 +38,11 @@
                                     </div>
                                     <div class="mb-5">
                                         <label for="price" class="required form-label">Harga</label>
-                                        <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ old('price') }}" placeholder="Harga Produk" required/>
+                                        <div class="input-group input-group-solid">
+                                            <span class="input-group-text">Rp.</span>
+                                            <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ old('price') }}" placeholder="Harga Produk" required/>
+                                            <span class="input-group-text">/kg</span>
+                                        </div>
                                         @error('price')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -74,7 +64,6 @@
                     <table id="kt_datatable_horizontal_scroll" class="table table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>Harga</th>
                                 <th class="text-end">Aksi</th>
@@ -84,14 +73,12 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td>
-                                        <span class="">{{ $product->category->name }}</span>
-                                    </td>
-                                    <td>
                                         <span class="">{{ $product->name }}</span>
                                     </td>
                                     <td>
-                                        <span class="">{{ $product->price }}</span>
-                                    </td>
+                                        <span class="">
+                                            Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                        </span>                                    </td>
                                     <td class="text-end">
                                         <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                             Aksi
@@ -136,20 +123,6 @@
             </div>
             <div class="modal-body">
                 <div class="mb-5">
-                    <label for="product_category_id" class="required form-label">Kategori</label>
-                    <select name="product_category_id" class="form-control form-control-solid @error('product_category_id') is-invalid @enderror" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $product->product_category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('product_category_id')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-5">
                     <label for="name" class="required form-label">Nama</label>
                     <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror" value="{{ $product->name }}" placeholder="Nama Produk" required/>
                     @error('name')
@@ -159,8 +132,13 @@
                     @enderror
                 </div>
                 <div class="mb-5">
+                    
                     <label for="price" class="required form-label">Harga</label>
-                    <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ $product->price }}" placeholder="Harga Produk" required/>
+                    <div class="input-group input-group-solid">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="number" name="price" class="form-control form-control-solid @error('price') is-invalid @enderror" value="{{ $product->price }}" placeholder="Harga Produk" required/>
+                        <span class="input-group-text">/kg</span>
+                    </div>
                     @error('price')
                         <div class="invalid-feedback">
                             {{ $message }}

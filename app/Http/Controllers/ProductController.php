@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $data = [
             'title' => 'Produk',
-            'subTitle' => 'Data Produk',
+            'subTitle' => null,
             'products' => Product::all(),
             'categories' => ProductCategory::all()
         ];
@@ -24,7 +24,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_category_id' => 'required|exists:product_categories,id',
             'name' => 'required|unique:products,name',
             'price' => 'required|numeric',
         ]);
@@ -33,7 +32,7 @@ class ProductController extends Controller
         }
 
         $product = new Product();
-        $product->product_category_id = $request->input('product_category_id');
+        $product->product_category_id = 1;
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->save();
@@ -43,7 +42,6 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_category_id' => 'required|exists:product_categories,id',
             'name' => 'required|unique:products,name,' . $id,
             'price' => 'required|numeric',
         ]);
@@ -52,7 +50,7 @@ class ProductController extends Controller
         }
 
         $product = Product::findOrFail($id);
-        $product->product_category_id = $request->input('product_category_id');
+        $product->product_category_id = 1;
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->save();

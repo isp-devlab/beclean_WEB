@@ -40,7 +40,21 @@
           </div>
         </div>
 
-        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Produk') here show @endif">
+        <div class="menu-item @if ($title == 'Produk') here @endif">
+          <a class="menu-link" href="{{ route('product.index') }}">
+            <span class="menu-icon">
+              <i class="ki-duotone ki-basket fs-2">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+                <span class="path4"></span>
+              </i>
+            </span>
+            <span class="menu-title">Produk</span>
+          </a>
+        </div>
+
+        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Produk') here show @endif">
           <span class="menu-link">
             <span class="menu-icon">
               <i class="ki-duotone ki-basket fs-2">
@@ -71,9 +85,9 @@
               </a>
             </div>
           </div>
-        </div>
+        </div> --}}
 
-        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Produk') here show @endif">
+        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Transaksi') here show @endif">
           <span class="menu-link">
             <span class="menu-icon">
               <i class="ki-duotone ki-handcart fs-2"></i>
@@ -82,7 +96,7 @@
             <span class="menu-arrow"></span>
           </span>
           <div class="menu-sub menu-sub-accordion menu-active-bg">
-            <div class="menu-item @if ($subTitle == 'Data Produk') here @endif">
+            <div class="menu-item @if ($subTitle == 'Pending') here @endif">
               <a class="menu-link" href="{{ route('transaction.pending.index') }}">
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
@@ -90,7 +104,7 @@
                 <span class="menu-title">Pending</span>
               </a>
             </div>
-            <div class="menu-item @if ($subTitle == 'Kategori') here @endif">
+            <div class="menu-item @if ($subTitle == 'On Progress') here @endif">
               <a class="menu-link" href="{{ route('transaction.onprogress.index') }}">
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
@@ -98,20 +112,12 @@
                 <span class="menu-title">On Progress</span>
               </a>
             </div>
-            <div class="menu-item @if ($subTitle == 'Kategori') here @endif">
+            <div class="menu-item @if ($subTitle == 'Pickup') here @endif">
               <a class="menu-link" href="{{ route('transaction.pickup.index') }}">
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">Pickup</span>
-              </a>
-            </div>
-            <div class="menu-item @if ($subTitle == 'Kategori') here @endif">
-              <a class="menu-link" href="{{ route('transaction.complete.index') }}">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Complete</span>
               </a>
             </div>
           </div>
