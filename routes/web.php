@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionOnProgressController;
 use App\Http\Controllers\TransactionPendingController;
+use App\Http\Controllers\TransactionPickupController;
 use App\Models\Transaction;
 
 Route::get('/', function () {
@@ -32,10 +33,7 @@ Route::prefix('/transaction')->group(function () {
         Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.onprogress.index');
     });
     Route::prefix('/pickup')->group(function () {
-        Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.pickup.index');
-    });
-    Route::prefix('/complete')->group(function () {
-        Route::get('/', [TransactionOnProgressController::class, 'index'])->name('transaction.complete.index');
+        Route::get('/', [TransactionPickupController::class, 'index'])->name('transaction.pickup.index');
     });
 })->middleware('auth');
 

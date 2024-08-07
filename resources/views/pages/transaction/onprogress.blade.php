@@ -13,8 +13,8 @@
             <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                 <div class="card-title">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Pending</span>
-                        <span class="text-muted fw-semibold fs-7">Belum Terjadwal</span>
+                        <span class="card-label fw-bold fs-3 mb-1">On Progress</span>
+                        <span class="text-muted fw-semibold fs-7">Sudah Terjadwal</span>
                     </h3>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <table id="kt_datatable_horizontal_scroll" class="table table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                <th>tanggal</th>
+                                <th>Jadwal</th>
                                 <th>Kategori</th>
                                 <th>Customer</th>
                                 <th>Alamat</th>
@@ -34,7 +34,7 @@
                             @foreach ($transaction as $item)
                                 <tr>
                                     <td>
-                                        <span class="">{{ $item->created_at }}</span>
+                                        <span class="">{{ $item->schedule->date }}</span>
                                     </td>
                                     <td>
                                       @if ($item->category->id == 1)
@@ -50,23 +50,20 @@
                                       <span class="">{{ $item->address }}</span>
                                     </td>
                                     <td class="text-end">
-                                      <a href="#"  data-bs-toggle="modal" data-bs-target="#jadwalkan{{ $item->id }}" class="btn btn-light-primary btn-sm">
-                                        <i class="ki-duotone ki-calendar-add">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                        <span class="path6"></span>
-                                        </i>
-                                        Jadwalkan</a>
-                                      <a href="#" data-bs-toggle="modal" data-bs-target="#info{{ $item->id }}" class="btn btn-primary btn-sm btn-icon">
-                                        <i class="ki-duotone ki-information-2">
+                                      {{-- <a href="#"  data-bs-toggle="modal" data-bs-target="#jadwalkan{{ $item->id }}" class="btn btn-light-primary btn-sm">
+                                        <i class="ki-duotone ki-calendar-edit">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                         <span class="path3"></span>
                                         </i>
-                                      </a>
+                                        Edit Jadwal</a> --}}
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#info{{ $item->id }}" class="btn btn-primary btn-sm btn-icon">
+                                          <i class="ki-duotone ki-information-2">
+                                          <span class="path1"></span>
+                                          <span class="path2"></span>
+                                          <span class="path3"></span>
+                                          </i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -78,7 +75,7 @@
     </div>
 </div>
 
-@foreach ($transaction as $item)
+{{-- @foreach ($transaction as $item)
 <div class="modal fade" tabindex="-1" id="jadwalkan{{ $item->id }}">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -92,15 +89,6 @@
           </div>
 
           <div class="modal-body">
-              <div class="mb-8">
-                <label for="" class="required fw-bold">Petugas</label>
-                  <select class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih Petugas" name="driver" required>
-                    <option></option>
-                    @foreach ($driver as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-              </div>
               <div class="mb-8  ">
                 <label for="" class="required fw-bold">Tanggal</label>
                 <input class="form-control form-control-solid" type="date" name="date" required>
@@ -115,7 +103,7 @@
       </div>
   </div>
 </div>
-@endforeach
+@endforeach --}}
 
 @foreach ($transaction as $item)
 <div class="modal fade" tabindex="-1" id="info{{ $item->id }}">
@@ -163,6 +151,25 @@
                       <td>:</td>
                       <td>
                         {{ $item->address }}
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+              <h4 class="my-5">Informasi Petugas</h4>
+              <table class="table table-row-dashed fw-normal">
+                <tbody>
+                    <tr>
+                      <td>Nama Petugas</td>
+                      <td>:</td>
+                      <td>
+                        {{ $item->schedule->user->name }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tanggal Penugasan</td>
+                      <td>:</td>
+                      <td>
+                        {{ $item->schedule->date }}
                       </td>
                     </tr>
                 </tbody>

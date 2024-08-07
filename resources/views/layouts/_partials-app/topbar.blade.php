@@ -22,7 +22,7 @@
   </div>
   
   <div class="toolbar d-flex align-items-stretch">
-    <div class="container-xxl py-6 py-lg-0 d-flex flex-column flex-lg-row align-items-lg-stretch justify-content-lg-between">
+    <div class="container-xxl py-6 py-lg-0 d-flex flex-row align-items-stretch justify-content-between">
       <div class="page-title d-flex justify-content-center flex-column me-5">
         <h1 class="d-flex flex-column text-dark fw-bold fs-3 mb-0">{{ $title }}</h1>
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 pt-1">
@@ -115,7 +115,7 @@
         </div>
 
         <div class="d-flex align-items-center">
-          <div class="d-flex align-items-center ps-5">
+          <div class="d-flex align-items-center ps-lg-5 ps-3">
             <div class="d-flex">
               <div class="d-flex align-items-center">
                 <a href="#" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-overflow="true">

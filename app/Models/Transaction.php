@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Item;
 use App\Models\User;
 use App\Models\Schedule;
+use App\Models\productCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -39,5 +42,10 @@ class Transaction extends Model
     public function schedule()
     {
         return $this->hasOne(Schedule::class);
+    }
+
+    public function item(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 }
