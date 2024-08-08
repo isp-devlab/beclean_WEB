@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('transaction_id');
             $table->date('date');
+            $table->boolean('pickup_status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -30,6 +31,7 @@ return new class extends Migration
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
 
+            $table->index('pickup_status');
             $table->index('date');
         });
     }

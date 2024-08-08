@@ -23,6 +23,8 @@ Route::prefix('/auth')->middleware(['guest'])->group(function () {
 Route::get('auth/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('pickup/{id}', [DashboardController::class, 'pickup'])->name('dashboard.pickup');
+Route::post('pickup-add', [DashboardController::class, 'pickupAdd'])->name('dashboard.pickup.add');
 
 Route::prefix('/transaction')->group(function () {
     Route::prefix('/pending')->group(function () {
