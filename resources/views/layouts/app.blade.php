@@ -23,15 +23,17 @@
   <div class="d-flex flex-column flex-root">
     <div class="page d-flex flex-row flex-column-fluid">
 
-      @include('layouts._partials-app.sidebar')
-      
-      <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+      @if (Auth::user()->role == 'admin')
+        @include('layouts._partials-app.sidebar')
+      @endif
+
+      <div class="@if (Auth::user()->role == 'admin') wrapper @endif d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
         @include('layouts._partials-app.topbar')
 
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-          <div class="post d-flex flex-column-fluid" id="kt_post">
-            <div id="kt_content_container" class="container-xxl">
+          <div class="post d-flex flex-column-fluid @if (Auth::user()->role == 'driver') mt-lg-5 pt-lg-5 @endif" id="kt_post">
+            <div id="kt_content_container" class="container-xxl @if (Auth::user()->role == 'driver') mt-lg-5 pt-lg-5 @endif">
 
               @yield('content')
 
@@ -39,7 +41,7 @@
           </div>
         </div>
 
-        @include('layouts._partials-app.footer')
+        {{-- @include('layouts._partials-app.footer') --}}
 
       </div>
     </div>

@@ -78,3 +78,33 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(event) {
+      if (event.target.classList.contains('btn-confirm')) {
+        var link = event.target.id;
+        var myModal = new bootstrap.Modal(document.getElementById('confirm'));
+        myModal.show();
+        document.querySelector('.ya').addEventListener('click', function() {
+          window.location.replace(link);
+        });
+      }
+    });
+  });
+</script>
+
+<div class="modal modal-delete" id="confirm" data-bs-backdrop="static">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content shadow rounded ">
+      <div class="modal-body p-4 text-center py-8">
+        <h5 class="mb-2">Konfirmasi</h5>
+        <p class="mb-0">Kamu yakin sudah menyelesaikan pekerjaan?</p>
+      </div>
+      <div class="modal-footer flex-nowrap p-0">
+        <button type="button" class="ya btn btn-lg btn-secondary bg-transparent text-dark fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" >Ya</button>
+        <button type="button" class="btn btn-lg btn-secondary bg-transparent text-dark fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal" aria-label="Close">Tidak</button>
+      </div>
+    </div>
+  </div>
+</div>

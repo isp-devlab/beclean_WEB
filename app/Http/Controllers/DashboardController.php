@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\productCategory;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
@@ -56,8 +57,20 @@ class DashboardController extends Controller
             'subTitle' => null,
             'schedule' => $pickup,        
         ];
-        // dd($data);
+        // dd($data['schedule']->transaction->latitude);
         return view('pages.pickup', $data);
 
+    }
+
+    public function selesai(Request $request, $id){
+        $schedule = Schedule::findOrFail($id);
+        $schedule->pickup_status = false;
+        $schedule->save();
+
+        $transaction = Transaction::findOrFail($schedule->transaction_id);
+        $transaction->transaction_status = true;
+        $transaction->save();
+
+        return redirect()->route('dashboard');
     }
 }

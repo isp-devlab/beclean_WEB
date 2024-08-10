@@ -69,22 +69,25 @@
   <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
         @forelse ($scheduleRecycle as $item)
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                  <div>
-                    <span class="fw-bold fs-5">
-                      {{ $item->transaction->user->name }}
-                    </span>
-                    <br>
-                    <span class="text-gray-500">
-                      {{ $item->transaction->address }}
-                    </span>
-                  </div>
-                  <i class="ki-duotone ki-right text-dark fs-1 ps-2"></i>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#confirm{{ $item->id }}">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <span class="fw-bold fs-5">
+                    {{ $item->transaction->user->name }}
+                  </span>
+                  <br>
+                  <span class="text-gray-500">
+                    {{ $item->transaction->address }}
+                  </span>
                 </div>
+                <i class="ki-duotone ki-right text-dark fs-1 ps-2">
+                </i>
               </div>
             </div>
+          </div>
+        </a>
         @empty
           <div class="text-center mt-5 pt-5">
             <span class="text-gray-500 pt-5 mt-5">~ Tidak ada tugas ~</span>
@@ -122,6 +125,67 @@
   </div>
 </div>
 @endif
+
+@foreach ($scheduleRecycle as $item)
+<div class="modal fade" tabindex="-1" id="confirm{{ $item->id }}">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-body">
+            <div class="table-responsive mt-4">
+              <table class="table table-row-dashed fw-normal">
+                <tbody>
+                  <tr>
+                    <td>Kategori</td>
+                    <td>:</td>
+                    <td>
+                      @if ($item->transaction->category->id == 1)
+                        <div class="badge badge-light-success fw-bold">{{ $item->transaction->category->name }}</div>
+                      @else
+                        <div class="badge badge-light-primary fw-bold">{{ $item->transaction->category->name }}</div>
+                      @endif
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Nama Cutomer</td>
+                    <td>:</td>
+                    <td>
+                      {{ $item->transaction->user->name }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>No. HP</td>
+                    <td>:</td>
+                    <td>
+                      {{ $item->transaction->user->phone }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Alamat </td>
+                    <td>:</td>
+                    <td>
+                      {{ $item->transaction->address }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>  
+            <div class="mt-5">
+              <form action="{{ route('dashboard.pickup.add') }}" method="POST" class="d-flex justify-content-center " id="form">
+                @csrf
+                <input type="hidden" name="id" value="{{ $item->id }}">
+                <button type="button" class="btn btn-light w-100 mx-3" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" id="kt_sign_in_submit" class="btn btn-primary w-100 mx-3">
+                  <span class="indicator-label">Mulai</span>
+                  <span class="indicator-progress" style="display: none;">Loading... 
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </button>
+              </form>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+@endforeach
 
 @foreach ($scheduleCompose as $item)
 <div class="modal fade" tabindex="-1" id="confirm2{{ $item->id }}">
@@ -181,9 +245,8 @@
           </div>
       </div>
   </div>
-@endforeach
 </div>
-
+@endforeach
 @endsection
 
 @section('script')

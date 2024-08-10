@@ -23,8 +23,8 @@
     </div>
   @endif
   
-  <div class="toolbar d-flex align-items-stretch">
-    <div class="container-xxl py-6 py-lg-0 d-flex flex-row align-items-stretch justify-content-between @if (Auth::user()->role == 'driver') bg-dark @endif">
+  <div class="toolbar d-flex align-items-stretch @if (Auth::user()->role == 'driver') bg-black @endif">
+    <div class="container-xxl py-6 py-lg-0 d-flex flex-row align-items-stretch justify-content-between @if (Auth::user()->role == 'driver') bg-black @endif">
       <div class="page-title d-flex justify-content-center  flex-column me-5">
         @if (Auth::user()->role == 'driver') 
           <h1 class="d-flex flex-column text-white fw-bold fs-1 mb-0">BECLEAN</h1>
