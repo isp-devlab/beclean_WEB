@@ -33,7 +33,7 @@
               @if ($schedule->transaction->product_category_id == 1) 
                 <button class="btn btn-light btn-sm ps-5 pe-5" data-bs-toggle="modal" data-bs-target="#input">Input Sampah</button>
               @else
-                <button class="btn btn-danger btn-sm ps-5 pe-5 btn-confirm" id="{{ route('dashboard.pickup.selesai', $schedule->id) }}">Selesaikan Pekerjaan</button>
+                <button class="btn btn-success btn-sm ps-5 pe-5 btn-confirm" id="{{ route('dashboard.pickup.selesai', $schedule->id) }}">Selesaikan Pekerjaan</button>
               @endif
             </div>
           </div>
@@ -44,9 +44,10 @@
 
 <div class="modal bg-body" tabindex="-1" id="input">
   <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content shadow-none">
+      <form action="{{ route('dashboard.pickup.selesai.post', $schedule->id) }}" method="POST" class="modal-content shadow-none">
+        @csrf
           <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+              <h5 class="modal-title">Produk Item</h5>
 
               <!--begin::Close-->
               <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
@@ -65,15 +66,17 @@
                             <div class="form-group row d-flex align-items-end justify-content-around">
                                 <div class="col-6">
                                     <label class="form-label">Produk:</label>
-                                    <select class="form-select select2-element mb-2 mb-md-0" data-control="select2" data-placeholder="Select an option">
+                                    <select class="form-select select2-element mb-2 mb-md-0" name="product" data-control="select2" data-placeholder="Select an option">
                                       <option></option>
-                                      <option value="1">Option 1</option>
-                                      <option value="2">Option 2</option>
+                                      @foreach ($product as $product)
+                                          
+                                      <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                      @endforeach
                                     </select>
                                 </div>
                                 <div class="col-3">
                                     <label class="form-label">Berat:</label>
-                                    <input type="text" class="form-control mb-2 mb-md-0" placeholder="0" />
+                                    <input type="text" class="form-control mb-2 mb-md-0" name="weight"  placeholder="0" />
                                 </div>
                                 <div class="col-3 pb-3">
                                     <a href="javascript:;" data-repeater-delete class="btn btn-icon btn-light-danger">
@@ -100,9 +103,9 @@
 
           <div class="modal-footer">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-success">Salesaikan Pekerjaan</button>
           </div>
-      </div>
+      </form>
   </div>
 </div>
 @endsection

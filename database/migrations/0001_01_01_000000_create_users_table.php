@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['user', 'driver', 'admin'])->default('user');
             $table->string('access_token')->nullable();
+            $table->decimal('credit', 15, 2)->default(0); // Credit with precision
             $table->timestamps();
 
             $table->index('email');

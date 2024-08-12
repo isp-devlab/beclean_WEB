@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\product;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\productCategory;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
@@ -55,7 +58,8 @@ class DashboardController extends Controller
         $data = [
             'title' => 'Pickup',
             'subTitle' => null,
-            'schedule' => $pickup,        
+            'schedule' => $pickup, 
+            'product' => product::all()       
         ];
         // dd($data['schedule']->transaction->latitude);
         return view('pages.pickup', $data);
@@ -63,6 +67,7 @@ class DashboardController extends Controller
     }
 
     public function selesai(Request $request, $id){
+        // dd($request->all());
         $schedule = Schedule::findOrFail($id);
         $schedule->pickup_status = false;
         $schedule->save();
@@ -70,6 +75,30 @@ class DashboardController extends Controller
         $transaction = Transaction::findOrFail($schedule->transaction_id);
         $transaction->transaction_status = true;
         $transaction->save();
+
+        $totalPrice = 0; // Inisialisasi total harga
+
+        if(is_array($request->kt_docs_repeater_basic)){
+            foreach ($request->kt_docs_repeater_basic as  $result) {
+                $product = product::find($result['product']);
+                $calculatedPrice = $product->price * $result['weight'];
+                $totalPrice += $calculatedPrice;
+                Item::updateOrInsert([
+                    'transaction_id' => $schedule->transaction_id,
+                    'product_name' => $product->name,
+                    'weight' => $result['weight'],
+                    'price' => $calculatedPrice
+                ]);
+            }
+
+            $user = User::find($schedule->transaction->user_id);
+
+            if ($user) {
+                // Tambahkan totalPrice ke kredit pengguna
+                $user->credit += $totalPrice;
+                $user->save();
+            }
+        }
 
         return redirect()->route('dashboard');
     }

@@ -20,7 +20,7 @@
               </div>
           </div>
       </div>
-      @if (Auth::user()->role == 'driver')
+      {{-- @if (Auth::user()->role == 'driver')
       <div class="row">
         <div class="col mb-5 ms-5">
           <div class="border border-gray-300 border-dashed rounded w-100 py-3 px-4 mt-3 bg-primary">
@@ -31,7 +31,7 @@
           </div>                 
         </div>
       </div>
-      @endif
+      @endif --}}
     </div>
   </div>
 
