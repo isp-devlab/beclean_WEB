@@ -73,7 +73,7 @@
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">Pencairan</span>
+                <span class="menu-title">Tarik Tunai</span>
               </a>
             </div>
             <div class="menu-item @if ($subTitle == 'On Progress') here @endif">
@@ -81,7 +81,7 @@
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">Debit</span>
+                <span class="menu-title">Transaksi</span>
               </a>
             </div>
           </div>

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Schedule;
+use Illuminate\Support\Carbon;
 use App\Models\productCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,6 +21,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'id',
+        'transaction_code',
         'user_id',
         'product_category_id',
         'address',
@@ -28,6 +30,18 @@ class Transaction extends Model
         'product_status',
         'transaction_status'
     ];
+
+    // Event saat model sedang dibuat
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($transaction) {
+            $now = Carbon::now();
+            $categoryId = $transaction->product_category_id;
+            $transaction->transaction_code = 'TRANS-' .$categoryId.$now->format('YmdHis');
+        });
+    }
 
     public function user(): BelongsTo
     {

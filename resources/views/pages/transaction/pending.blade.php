@@ -23,6 +23,7 @@
                     <table id="kt_datatable_horizontal_scroll" class="table table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                <th>Kode Transaksi</th>
                                 <th>tanggal</th>
                                 <th>Kategori</th>
                                 <th>Customer</th>
@@ -33,6 +34,9 @@
                         <tbody>
                             @foreach ($transaction as $item)
                                 <tr>
+                                    <td>
+                                      <span class="">{{ $item->transaction_code }}</span>
+                                    </td>
                                     <td>
                                         <span class="">{{ $item->created_at }}</span>
                                     </td>
@@ -85,7 +89,7 @@
         <form action="{{ route('transaction.pending.addSchedule', $item->id) }}" method="POST">
           @csrf
           <div class="modal-header">
-            <h5 class="modal-title">Buat Jadwal</h5>
+            <h5 class="modal-title">Buat Jadwal {{ $item->transaction_code }}</h5>
             <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal">
                 <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i>
             </div>
@@ -122,7 +126,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Informasi</h5>
+              <h5 class="modal-title">{{ $item->transaction_code }}</h5>
               <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal">
                   <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i>
               </div>

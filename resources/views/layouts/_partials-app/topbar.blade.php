@@ -129,25 +129,32 @@
                   <img src="https://ui-avatars.com/api/?background=F9F9F9&color=080655&bold=true&name={{ Auth::user()->name }}" class="rounded-3 h-35px w-35px" alt="{{ Auth::user()->name }}" />
                 </a>
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
-                  <div class="menu-item px-5">
-                    <a href="#" class="menu-link px-5">
-                      <i class="ki-duotone ki-user fs-2 me-3">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                      </i>
-                      Profil
-                    </a>
-                  </div>
-                  <div class="menu-item px-5">
-                    <a href="{{ route('logout') }}" class="menu-link px-5">
-                      <i class="ki-duotone ki-entrance-right fs-2 me-3 minimize-default">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                      </i>
-                      Keluar
-                    </a>
-                  </div>
-                </div>
+                  <div class="menu-item px-3">
+                    <div class="menu-content d-flex align-items-center px-3">
+                        <div class="symbol symbol-50px me-5">
+                            <img alt="Logo" src="https://ui-avatars.com/api/?background=F9F9F9&color=080655&bold=true&name={{ Auth::user()->name }}">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="fw-bold d-flex align-items-center fs-5">
+                              {{ Auth::user()->name }}
+                            </div>
+                            <span class="fw-semibold text-muted text-hover-primary fs-7">
+                              {{ Auth::user()->email }}              
+                            </span>
+                        </div>
+                    </div>
+                    <div class="separator my-2"></div>
+                    </div>
+                      <div class="menu-item px-5">
+                        <a href="{{ route('logout') }}" class="menu-link px-5">
+                          <i class="ki-duotone ki-entrance-right fs-2 me-3 minimize-default">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                          Keluar
+                        </a>
+                      </div>
+                    </div>
               </div>
             </div>
           </div>

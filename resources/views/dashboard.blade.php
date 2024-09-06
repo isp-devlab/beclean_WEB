@@ -130,8 +130,11 @@
 <div class="modal fade" tabindex="-1" id="confirm{{ $item->id }}">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ $item->transaction->transaction_code }}</h5>
+          </div>
           <div class="modal-body">
-            <div class="table-responsive mt-4">
+            <div class="table-responsive">
               <table class="table table-row-dashed fw-normal">
                 <tbody>
                   <tr>
@@ -191,6 +194,9 @@
 <div class="modal fade" tabindex="-1" id="confirm2{{ $item->id }}">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ $item->transaction->transaction_code }}</h5>
+          </div>
           <div class="modal-body">
             <div class="table-responsive mt-4">
               <table class="table table-row-dashed fw-normal">

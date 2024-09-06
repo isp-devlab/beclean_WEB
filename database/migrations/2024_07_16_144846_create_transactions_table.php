@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction_code')->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_category_id');
             $table->string('longitude');
             $table->string('latitude');
             $table->string('address');
-            $table->boolean('transaction_status');
+            $table->boolean('transaction_status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')

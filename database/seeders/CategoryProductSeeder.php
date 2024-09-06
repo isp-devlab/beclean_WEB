@@ -19,7 +19,7 @@ class CategoryProductSeeder extends Seeder
         ]);
         productCategory::create([
             'id' => '2',
-            'name' => 'Basah',
+            'name' => 'Rumah Tangga',
         ]);
     }
 }
