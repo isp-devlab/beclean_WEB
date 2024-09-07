@@ -54,7 +54,7 @@
           </a>
         </div>
 
-        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Transaksi') here show @endif">
+        <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($title == 'Dana') here show @endif">
           <span class="menu-link">
             <span class="menu-icon">
               <i class="ki-duotone ki-wallet fs-2">
@@ -76,8 +76,8 @@
                 <span class="menu-title">Tarik Tunai</span>
               </a>
             </div>
-            <div class="menu-item @if ($subTitle == 'On Progress') here @endif">
-              <a class="menu-link" href="{{ route('transaction.onprogress.index') }}">
+            <div class="menu-item @if ($subTitle == 'Transaksi') here @endif">
+              <a class="menu-link" href="{{ route('fund.transaction') }}">
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
                 </span>

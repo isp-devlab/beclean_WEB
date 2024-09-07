@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FundController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
@@ -43,6 +44,10 @@ Route::prefix('/transaction')->group(function () {
     Route::prefix('/pickup')->group(function () {
         Route::get('/', [TransactionPickupController::class, 'index'])->name('transaction.pickup.index');
     });
+})->middleware('auth');
+
+Route::prefix('/fund')->group(function () {
+    Route::get('/transaction', [FundController::class, 'transaction'])->name('fund.transaction');
 })->middleware('auth');
 
 Route::prefix('/product')->group(function () {
