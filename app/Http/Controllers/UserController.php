@@ -23,6 +23,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'phone' => 'required',
+            'role' => 'required',
             'password' => 'required',
         ]);
         if ($validator->fails()) {
@@ -32,6 +34,8 @@ class UserController extends Controller
         $user = New User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->role = $request->input('role');
         $user->password = Hash::make($request->input('password'));
         $user->save();
         return redirect()->route('user')->with('success','Berhasil menambahkan pengguna baru');
@@ -40,6 +44,8 @@ class UserController extends Controller
     public function update($id, Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'phone' => 'required',
+            'role' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
         ]);
         if ($validator->fails()) {
@@ -50,6 +56,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->role = $request->input('role');
         if($request->input('password')){
             $user->password = Hash::make($request->input('password'));
         }

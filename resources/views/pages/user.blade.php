@@ -45,6 +45,28 @@
                             </div>
                           @enderror
                         </div>
+                        <div class="mb-3">
+                          <label for="exampleFormControlInput1" class="required form-label">No. Telp</label>
+                          <input type="text" name="phone" class="form-control form-control-solid @error('phone') is-invalid @enderror"  value="{{ old('phone') }}" placeholder="No. Telp" required/>
+                          @error('phone')
+                            <div class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleFormControlInput1" class="required form-label">Role</label>
+                          <select class="form-select form-select-solid  @error('role') is-invalid @enderror" name="role" aria-label="Select example">
+                              <option value="">Pilih Role</option>
+                              <option value="admin" @if (old('role') == 'admin') selected @endif>admin</option>
+                              <option value="driver" @if (old('role') == 'driver') selected @endif>driver</option>
+                          </select>
+                          @error('role')
+                            <div class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                          @enderror
+                        </div>
                         <div class="mb-5">
                           <label for="exampleFormControlInput1" class="required form-label">Password</label>
                           <input type="password" name="password" class="form-control form-control-solid"  value="{{ old('password') }}" placeholder="********" required/>
@@ -151,6 +173,29 @@
                 <label for="exampleFormControlInput1" class="required form-label">Nama</label>
                 <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror"  value="{{ $item->name }}" placeholder="Nama" required/>
                 @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="required form-label">No. Telp</label>
+                <input type="text" name="phone" class="form-control form-control-solid @error('phone') is-invalid @enderror"  value="{{ $item->phone }}" placeholder="No. Telp" required/>
+                @error('phone')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="required form-label">Role</label>
+                <select class="form-select form-select-solid  @error('role') is-invalid @enderror" name="role" aria-label="Select example">
+                    <option value="">Pilih Role</option>
+                    <option value="driver" @if ($item->role == 'driver') selected @endif>Driver</option>
+                    <option value="admin" @if ($item->role == 'admin') selected @endif>Admin</option>
+                    <option value="user" @if ($item->role == 'user') selected @endif>User</option>
+                </select>
+                @error('role')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
