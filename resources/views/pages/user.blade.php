@@ -72,6 +72,7 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
+                  <th>Saldo</th>
                   <th>Role</th>
                   <th class="text-end">Actions</th>
                 </tr>
@@ -94,6 +95,11 @@
                     </td>
                     <td>
                       <span class="">{{ $item->phone }}</span>
+                    </td>
+                     <td>
+                      <span class="">                                            
+                        Rp. {{ number_format($item->credit, 0, ',', '.') }}
+                      </span>
                     </td>
                     <td>
                       <span class="">{{ $item->role }}</span>

@@ -1,14 +1,14 @@
 @extends('layouts.auth')
 
 @section('content')
-    <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" id="login-form" method="POST" action="{{ route('login.submit') }}">
+    <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" id="login-form" method="POST" action="{{ route('forgot.submit') }}">
         @csrf
         <div class="mb-11">
             <h1 class="text-gray-900 fw-bolder mb-3">
-                Welcome Back!
+                Forgot Password?
             </h1>
             <div class="text-gray-500 fw-semibold fs-6">
-                Enter your credentials to access your account.
+                Enter your credentials to reset your password 
             </div>
         </div>
         @if (session()->has('error'))
@@ -27,28 +27,18 @@
             </div>
             @enderror
         </div>
-        <div class="fv-row mb-3 fv-plugins-icon-container">    
-            <input type="password" placeholder="********" name="password" autocomplete="off" class="form-control bg-transparent @error('password') is-invalid @enderror" required>
-            @error('password')
-            <div class="invalid-feedback text-red-1">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">    
-            <a href="{{ route('forgot') }}"" class="link-primary">
-                Forgot Password ?
-            </a>
-        </div>
 
         <div class="d-grid mb-10">
             <button type="submit" id="submit" class="btn btn-primary" fdprocessedid="ra9kde">
-                <span class="indicator-label">Sign In</span>    
+                <span class="indicator-label">Reset Password</span>    
                 <span class="indicator-progress" style="display: none;"> 
                     Please wait...    
                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                 </span>
             </button>
+            <a href="{{ route('login') }}" class="btn btn-light">
+              Cancel
+            </a>
         </div>
     </form>
 @endsection
