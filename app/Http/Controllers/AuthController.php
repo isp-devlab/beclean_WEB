@@ -20,6 +20,7 @@ class AuthController extends Controller
         ];
         return view('auth.login', $data);
     }
+    
 
     public function loginSubmit(Request $request)
     {
@@ -35,12 +36,15 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
-            return redirect()->route('dashboard');
+            if ($user->role === 'admin' || $user->role === 'driver') {
+                Auth::login($user);
+                return redirect()->route('dashboard');
+            } else {
+                Auth::logout();
+                return redirect()->route('login')->with('error', 'Username/Email and password are incorrect, please try again');
+            }
         } else {
-            return redirect()->route('login')->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-            ])->withInput();
+            return redirect()->route('login')->with('error', 'Username/Email and password are incorrect, please try again');
         }
     }
 
