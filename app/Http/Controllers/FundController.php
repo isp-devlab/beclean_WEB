@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 
 class FundController extends Controller
@@ -12,9 +13,27 @@ class FundController extends Controller
         $data = [
             'title' => 'Dana',
             'subTitle' => 'Tarik Tunai',
-            'categories' => ProductCategory::all()
+            'pendings' => Withdraw::where('is_approve', false)->get()
         ];
-        return view('pages.fund.withdraw', $data);
+        return view('pages.fund.pending', $data);
+    }
+
+    public function approve($id)
+    {
+        $withdraw = Withdraw::findOrFail($id);
+        $withdraw->is_approve = true;
+        $withdraw->save();
+        return redirect()->route('fund.withdraw.pending')->with('success', 'Tarik tunai berhasil di setujui');
+    }
+
+    public function mutation(Request $request)
+    {
+        $data = [
+            'title' => 'Dana',
+            'subTitle' => 'Tarik Tunai',
+            'mutations' => Withdraw::where('is_approve', true)->get()
+        ];
+        return view('pages.fund.mutation', $data);
     }
 
     public function transaction(){

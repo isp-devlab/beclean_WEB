@@ -68,8 +68,8 @@
             <span class="menu-arrow"></span>
           </span>
           <div class="menu-sub menu-sub-accordion menu-active-bg">
-            <div class="menu-item @if ($subTitle == 'Pending') here @endif">
-              <a class="menu-link" href="{{ route('transaction.pending.index') }}">
+            <div class="menu-item @if ($subTitle == 'Tarik Tunai') here @endif">
+              <a class="menu-link" href="{{ route('fund.withdraw.pending') }}">
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
                 </span>

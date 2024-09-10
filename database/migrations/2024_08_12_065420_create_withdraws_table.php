@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('account_name');
             $table->decimal('debit', 15, 2);
             $table->string('proof')->nullable();
-            $table->boolean('is_aprrove')->default(0);
+            $table->boolean('is_approve')->default(0);
             $table->timestamps();
         });
     }

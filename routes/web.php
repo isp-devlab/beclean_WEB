@@ -47,6 +47,11 @@ Route::prefix('/transaction')->group(function () {
 })->middleware('auth');
 
 Route::prefix('/fund')->group(function () {
+    Route::prefix('/withdraw')->group(function () {
+        Route::get('/pending', [FundController::class, 'withdraw'])->name('fund.withdraw.pending');
+        Route::get('/pending/{id}/approve', [FundController::class, 'approve'])->name('fund.withdraw.pending.aprove');
+        Route::get('/mutation', [FundController::class, 'mutation'])->name('fund.withdraw.mutation');
+    });
     Route::get('/transaction', [FundController::class, 'transaction'])->name('fund.transaction');
 })->middleware('auth');
 
