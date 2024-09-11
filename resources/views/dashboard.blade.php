@@ -253,8 +253,6 @@
   </div>
 </div>
 @endforeach
-@endsection
-
 <!-- HTML untuk modal Bootstrap -->
 <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -313,6 +311,8 @@
     </div>
   </div>
 </div>
+@endsection
+
 
 @section('script')
 <script>
