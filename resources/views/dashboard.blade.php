@@ -75,7 +75,7 @@
               <div class="d-flex align-items-center justify-content-between">
                 <div>
                   <span class="fw-bold fs-5">
-                    {{ $item->transaction->user->name }}
+                    {{ $item->transaction->transaction->user->name }}
                   </span>
                   <br>
                   <span class="text-gray-500">
@@ -255,6 +255,65 @@
 @endforeach
 @endsection
 
+<!-- HTML untuk modal Bootstrap -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="d-flex">
+            <h5 class="modal-title" id="modalTitle">Event Details</h5>
+            <span id="category" class="ms-3">vv</span>
+          </div>
+          <p id="modalStart"></p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <h6>Customer</h6>
+          <table class="table table-row-dashed fs-7">
+            <tbody>
+              <tr>
+                <td>Nama Cutomer</td>
+                <td>:</td>
+                <td id="nama">
+                </td>
+              </tr>
+              <tr>
+                <td>No. HP</td>
+                <td>:</td>
+                <td id="hp">
+                </td>
+              </tr>
+              <tr>
+                <td>Alamat </td>
+                <td>:</td>
+                <td id="alamat">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h6 class="mt-5">Petugas</h6>
+          <table class="table table-row-dashed fs-7">
+            <tbody>
+              <tr>
+                <td>Nama Petugas</td>
+                <td>:</td>
+                <td id="petugas">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @section('script')
 <script>
   document.getElementById('form').addEventListener('submit', function() {
@@ -265,31 +324,51 @@
   });
 </script>
 @if (Auth::user()->role == 'admin')
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
-  <script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             events: [
+              @foreach ($schedule as $event)
                 {
-                    title: 'Event 1',
-                    start: '2024-07-01'
+                    title: '{{ $event->transaction->transaction_code }}',
+                    start: '{{ $event->date }}',
+                    extendedProps: {
+                        petugas: '{{ $event->user->name }}',
+                        nama: '{{ $event->transaction->user->name }}',
+                        hp: '{{ $event->transaction->user->phone }}',
+                        category: `{!! $event->transaction->category->id == 1 ? 
+                                    "<div class='badge badge-light-success fw-bold'>" . $event->transaction->category->name . "</div>" : 
+                                    "<div class='badge badge-light-primary fw-bold'>" . $event->transaction->category->name . "</div>" !!}`,
+                        alamat: '{{ $event->transaction->address }}'
+                    },
+                    backgroundColor: '{{ $event->transaction->category->id == 1 ? "#50cd89" : "#009ef7" }}',
+                    borderColor: '{{ $event->transaction->category->id == 1 ? "#50cd89" : "#009ef7" }}'
                 },
-                {
-                    title: 'Event 2',
-                    start: '2024-07-05',
-                },
-                {
-                    title: 'Event 3',
-                    start: '2024-07-05',
-                }
-            ]
+              @endforeach
+            ],
+            eventClick: function(info) {
+                // Set informasi ke dalam modal
+                document.getElementById('modalTitle').textContent = info.event.title;
+                document.getElementById('modalStart').textContent = info.event.start.toLocaleDateString();
+                document.getElementById('category').innerHTML = info.event.extendedProps.category;
+                document.getElementById('petugas').textContent = info.event.extendedProps.petugas;
+                document.getElementById('nama').textContent = info.event.extendedProps.nama;
+                document.getElementById('hp').textContent = info.event.extendedProps.hp;
+                document.getElementById('alamat').textContent = info.event.extendedProps.alamat;
+
+                // Tampilkan modal
+                var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+                eventModal.show();
+            }
         });
 
         calendar.render();
     });
-  </script>
+</script>
+
 @endif
 @endsection

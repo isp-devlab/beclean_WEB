@@ -36,9 +36,13 @@ class DashboardController extends Controller
                                     $query->where('product_category_id', 1)
                                     ->where('transaction_status', 0);
                                 })
-                                ->get()         
+                                ->get(),
+            'schedule' => Schedule::whereHas('transaction', function ($query) {
+                                $query->where('transaction_status', 0);
+                            })
+                            ->get(),
         ];
-        // dd($data['scheduleCompose']);
+        // dd($data['schedule']);
         return view('dashboard', $data);
     }
 
