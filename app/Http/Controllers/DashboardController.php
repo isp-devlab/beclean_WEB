@@ -6,7 +6,7 @@ use App\Models\Item;
 use App\Models\product;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
-use App\Models\productCategory;
+use App\Models\ProductCategory;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $data = [
             'title' => 'Dashboaard',
             'subTitle' => null,
-            'category' => productCategory::all(),
+            'category' => ProductCategory::all(),
             'scheduleCompose' => Schedule::where('date', '<=', Date::now()->format('Y-m-d'))
                                 ->where('user_id', Auth::user()->id)
                                 ->whereHas('transaction', function ($query) {
