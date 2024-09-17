@@ -27,7 +27,6 @@ class Transaction extends Model
         'address',
         'longitude',
         'latitude',
-        'product_status',
         'transaction_status'
     ];
 

@@ -39,7 +39,6 @@ class AccountController extends Controller
                 'sometimes',
                 Rule::unique('users')->ignore(Auth::user()->id),
             ],
-            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);    
         $validation = array_fill_keys(array_keys($request->all()), []);    
         if ($validator->fails()) {
