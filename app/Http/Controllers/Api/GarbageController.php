@@ -63,7 +63,7 @@ class GarbageController extends Controller
         try {
             $keyword = $request->input('q');
             $perPage = $request->input('perpage', 10);            
-            $data = Transaction::where('transaction_code', 'like', "%$keyword%")->where('transaction_status', false)->with(['category', 'schedule'])->paginate($perPage);
+            $data = Transaction::where('transaction_code', 'like', "%$keyword%")->where('user_id', Auth::user()->id)->where('transaction_status', false)->with(['category', 'schedule'])->paginate($perPage);
             return response()->json([
                 'response' => Response::HTTP_OK,
                 'success' => true,
@@ -84,7 +84,7 @@ class GarbageController extends Controller
         try {
             $keyword = $request->input('q');
             $perPage = $request->input('perpage', 10);            
-            $data = Transaction::where('transaction_code', 'like', "%$keyword%")->where('transaction_status', true)->with(['category', 'schedule', 'item'])->paginate($perPage);
+            $data = Transaction::where('transaction_code', 'like', "%$keyword%")->where('user_id', Auth::user()->id)->where('transaction_status', true)->with(['category', 'schedule', 'item'])->paginate($perPage);
             return response()->json([
                 'response' => Response::HTTP_OK,
                 'success' => true,
