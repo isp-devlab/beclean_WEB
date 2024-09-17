@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\GarbageController;
+use App\Http\Controllers\Api\ProductController;
 
 Route::prefix('/v1')->group(function () {
 
@@ -19,6 +20,10 @@ Route::prefix('/v1')->group(function () {
         Route::post('/', [GarbageController::class, 'store']);
         Route::get('/active', [GarbageController::class, 'active']);
         Route::get('/history', [GarbageController::class, 'history']);
+    });  
+
+    Route::prefix('/product')->middleware('auth:sanctum')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
     });  
 
     Route::prefix('/account')->middleware('auth:sanctum')->group(function () {
