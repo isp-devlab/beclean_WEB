@@ -17,6 +17,10 @@ class Withdraw extends Model
         'id',
         'user_id',
         'debit',
+        'bank_name',
+        'account_number',
+        'account_name',
+        'is_approve',
     ];
 
     public function user()

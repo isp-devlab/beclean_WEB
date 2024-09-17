@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\GarbageController;
+use App\Http\Controllers\Api\MutationController;
 use App\Http\Controllers\Api\ProductController;
 
 Route::prefix('/v1')->group(function () {
@@ -25,6 +26,10 @@ Route::prefix('/v1')->group(function () {
     Route::prefix('/product')->middleware('auth:sanctum')->group(function () {
         Route::get('/', [ProductController::class, 'index']);
     });  
+
+    Route::prefix('/mutation')->middleware('auth:sanctum')->group(function () {
+        Route::get('/', [MutationController::class, 'index']);
+    }); 
 
     Route::prefix('/account')->middleware('auth:sanctum')->group(function () {
         Route::get('/', [AccountController::class, 'me']);
