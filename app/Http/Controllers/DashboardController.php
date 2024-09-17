@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use App\Models\product;
+use App\Models\Product;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
@@ -63,7 +63,7 @@ class DashboardController extends Controller
             'title' => 'Pickup',
             'subTitle' => null,
             'schedule' => $pickup, 
-            'product' => product::all()       
+            'product' => Product::all()       
         ];
         // dd($data['schedule']->transaction->latitude);
         return view('pages.pickup', $data);
@@ -84,7 +84,7 @@ class DashboardController extends Controller
 
         if(is_array($request->kt_docs_repeater_basic)){
             foreach ($request->kt_docs_repeater_basic as  $result) {
-                $product = product::find($result['product']);
+                $product = Product::find($result['product']);
                 $calculatedPrice = $product->price * $result['weight'];
                 $totalPrice += $calculatedPrice;
                 Item::updateOrInsert([
